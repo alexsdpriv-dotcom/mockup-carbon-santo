@@ -1,3 +1,4 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
 
@@ -195,6 +196,105 @@
   .cart-n { background: var(--ember); color: #fff; width: 20px; height: 20px; font-size: 0.62rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
   .cart-t { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
   .cart-p { font-size: 0.82rem; font-weight: 600; }
+
+  /* ── NAV HAMBURGER ─────────────────────── */
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; flex-direction: column; gap: 5px; }
+  .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--ink); transition: all .25s; }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── MOBILE ────────────────────────────── */
+  @media (max-width: 768px) {
+
+    /* NAV */
+    .nav { padding: 0 20px; height: 58px; position: sticky; top: 0; z-index: 200; }
+    .nav-toggle { display: flex; }
+    .nav-links {
+      display: none; flex-direction: column; gap: 0;
+      position: absolute; top: 58px; left: 0; right: 0;
+      background: var(--paper); border-bottom: 1px solid var(--ink-12);
+      padding: 8px 0; z-index: 200;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li { border-bottom: 1px solid var(--ink-06); }
+    .nav-links a { display: block; padding: 14px 24px; font-size: 0.78rem; }
+    .nav-cta { display: none; }
+    .nav-mobile-cta {
+      display: block; margin: 8px 20px 12px;
+      background: var(--ember); color: #fff; border: none;
+      padding: 13px; font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer; font-family: 'DM Sans', sans-serif;
+      width: calc(100% - 40px); text-align: center;
+    }
+
+    /* HERO */
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-l { padding: 44px 24px 40px; border-right: none; border-bottom: 1px solid var(--ink-12); }
+    .hero-h1 { font-size: clamp(3rem, 14vw, 4.5rem); margin-bottom: 18px; }
+    .hero-copy { font-size: 0.9rem; max-width: 100%; margin-bottom: 28px; }
+    .hero-btns { flex-direction: column; gap: 10px; margin-bottom: 36px; }
+    .btn-p, .btn-s { width: 100%; padding: 15px; text-align: center; font-size: 0.78rem; }
+    .hero-metrics { gap: 0; justify-content: space-between; }
+    .hero-metrics > div { flex: 1; text-align: center; }
+    .met-n { font-size: 2rem; }
+
+    .hero-r { padding: 32px 24px; min-height: 240px; }
+    .hero-r-big { font-size: 7rem; }
+    .hero-card { padding: 22px 20px; }
+
+    /* BAND */
+    .band { flex-direction: column; }
+    .band-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 16px 24px; }
+    .band-item:last-child { border-bottom: none; }
+    .band-val { font-size: 0.9rem; }
+
+    /* RESERVA */
+    .reserva { padding: 56px 24px; }
+    .reserva-inner { grid-template-columns: 1fr; gap: 36px; }
+    .res-h2 { font-size: 2.4rem; }
+    .res-form { padding: 24px 20px 20px; }
+    .res-grid { grid-template-columns: 1fr; }
+    .rf { border-right: none !important; }
+    .rf.w2 { grid-column: span 1; }
+    .rf-input, .rf-select { font-size: 1rem; padding: 4px 0; }
+    .res-submit { padding: 18px; font-size: 0.8rem; }
+
+    /* MENU */
+    .menu { padding: 56px 20px; }
+    .sec-hd { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .cats { flex-wrap: wrap; border: none; gap: 6px; }
+    .cat { border: 1px solid var(--ink-12) !important; border-radius: 2px; padding: 8px 14px; font-size: 0.7rem; }
+    .grid { grid-template-columns: 1fr; gap: 1px; }
+    .feat { grid-column: span 1; grid-template-columns: 1fr; }
+    .feat .card-img { height: 140px; border-right: none; border-bottom: 1px solid var(--ink-06); }
+    .feat .card-body { padding: 22px 20px; }
+    .card-img { height: 120px; font-size: 3.5rem; }
+    .card-name { font-size: 1.15rem; }
+    .card-desc { font-size: 0.78rem; }
+    .card-add { width: 36px; height: 36px; font-size: 1.1rem; }
+    .card-price { font-size: 1.4rem; }
+
+    /* ABOUT */
+    .about { grid-template-columns: 1fr; gap: 36px; padding: 56px 24px; }
+    .about-vis { height: 200px; }
+    .about-h2 { font-size: 2.2rem; }
+    .about-q { font-size: 1rem; }
+
+    /* HOURS */
+    .hours { grid-template-columns: 1fr; gap: 48px; padding: 56px 24px; }
+    .h-row { font-size: 0.88rem; padding: 13px 0; }
+
+    /* FOOTER */
+    .footer { flex-direction: column; gap: 16px; padding: 28px 24px; text-align: center; }
+    .footer-soc { justify-content: center; }
+
+    /* CART */
+    .cart { bottom: 16px; right: 16px; padding: 11px 16px; gap: 10px; }
+    .cart-t { font-size: 0.68rem; }
+    .cart-p { font-size: 0.8rem; }
+  }
 </style>
 
 <div class="r">
@@ -208,12 +308,16 @@
         <span class="nav-loc">Playas de Tijuana · El Jardín Food Park</span>
       </div>
     </a>
-    <ul class="nav-links">
-      <li><a href="#" onclick="document.querySelector('.menu').scrollIntoView({behavior:'smooth'});return false;">Menú</a></li>
-      <li><a href="#" onclick="document.querySelector('.about').scrollIntoView({behavior:'smooth'});return false;">Nosotros</a></li>
-      <li><a href="#" onclick="document.querySelector('.hours').scrollIntoView({behavior:'smooth'});return false;">Ubicación</a></li>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#" onclick="closeNav();document.querySelector('.menu').scrollIntoView({behavior:'smooth'});return false;">Menú</a></li>
+      <li><a href="#" onclick="closeNav();document.querySelector('.about').scrollIntoView({behavior:'smooth'});return false;">Nosotros</a></li>
+      <li><a href="#" onclick="closeNav();document.querySelector('.hours').scrollIntoView({behavior:'smooth'});return false;">Ubicación</a></li>
+      <li class="nav-mobile-cta" onclick="closeNav();document.querySelector('.reserva').scrollIntoView({behavior:'smooth'})">Reservar Mesa</li>
     </ul>
     <button class="nav-cta" onclick="document.querySelector('.reserva').scrollIntoView({behavior:'smooth'})">Reservar Mesa</button>
+    <button class="nav-toggle" id="navToggle" onclick="toggleNav()" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- HERO -->
@@ -458,6 +562,17 @@
 </div>
 
 <script>
+function toggleNav() {
+  const links = document.getElementById('navLinks');
+  const toggle = document.getElementById('navToggle');
+  links.classList.toggle('open');
+  toggle.classList.toggle('open');
+}
+function closeNav() {
+  document.getElementById('navLinks').classList.remove('open');
+  document.getElementById('navToggle').classList.remove('open');
+}
+
 function setCat(b) {
   document.querySelectorAll('.cat').forEach(c => c.classList.remove('on'));
   b.classList.add('on');
