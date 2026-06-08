@@ -1,0 +1,512 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:     #18160F;
+    --ink-60:  rgba(24,22,15,0.6);
+    --ink-35:  rgba(24,22,15,0.35);
+    --ink-12:  rgba(24,22,15,0.12);
+    --ink-06:  rgba(24,22,15,0.06);
+    --paper:   #F8F6F1;
+    --paper-2: #F1EDE5;
+    --paper-3: #E9E4DA;
+    --ember:   #C94E1E;
+    --ember-h: #A83E16;
+    --white:   #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  .r {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ───────────────────────────────── */
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 64px;
+    background: var(--paper);
+    border-bottom: 1px solid var(--ink-12);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-mark { width: 8px; height: 8px; background: var(--ember); border-radius: 50%; flex-shrink: 0; }
+  .nav-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.14em; color: var(--ink); line-height: 1; }
+  .nav-loc { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-35); display: block; margin-top: 2px; font-weight: 400; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-60); text-decoration: none; font-weight: 400; transition: color .2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta { background: var(--ember); color: #fff; border: none; padding: 10px 22px; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .2s; }
+  .nav-cta:hover { background: var(--ember-h); }
+
+  /* ── HERO ──────────────────────────────── */
+  .hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh; }
+
+  .hero-l { padding: 64px 48px 64px 48px; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid var(--ink-12); }
+  .tag { font-size: 0.62rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ember); font-weight: 500; display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+  .tag::before { content: ''; display: block; width: 28px; height: 1px; background: var(--ember); flex-shrink: 0; }
+
+  .hero-h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.6rem, 5.5vw, 6rem); font-weight: 300; line-height: 0.95; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 24px; }
+  .hero-h1 em { font-style: italic; color: var(--ember); font-weight: 300; }
+
+  .hero-copy { font-size: 0.92rem; color: var(--ink-60); line-height: 1.7; font-weight: 300; max-width: 360px; margin-bottom: 40px; }
+
+  .hero-btns { display: flex; gap: 12px; margin-bottom: 52px; }
+  .btn-p { background: var(--ember); color: #fff; border: none; padding: 14px 32px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .2s, transform .1s; }
+  .btn-p:hover { background: var(--ember-h); transform: translateY(-1px); }
+  .btn-s { border: 1px solid var(--ink-35); color: var(--ink-60); background: transparent; padding: 13px 30px; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.09em; text-transform: uppercase; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .2s; }
+  .btn-s:hover { border-color: var(--ink); color: var(--ink); }
+
+  .hero-metrics { display: flex; gap: 40px; padding-top: 28px; border-top: 1px solid var(--ink-12); }
+  .met-n { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 600; color: var(--ink); line-height: 1; }
+  .met-l { font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-35); margin-top: 4px; }
+
+  .hero-r { background: var(--paper-2); display: flex; flex-direction: column; justify-content: flex-end; padding: 48px; position: relative; overflow: hidden; }
+  .hero-r-pattern { position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, var(--ink-06) 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, var(--ink-06) 40px); pointer-events: none; }
+  .hero-r-big { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-55%); font-family: 'Bebas Neue', sans-serif; font-size: 11rem; color: var(--ink); opacity: 0.04; letter-spacing: 0.04em; pointer-events: none; white-space: nowrap; }
+  .hero-card { position: relative; z-index: 2; background: var(--white); border: 1px solid var(--ink-12); padding: 28px 30px; }
+  .hc-label { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ember); font-weight: 500; margin-bottom: 10px; }
+  .hc-name { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; color: var(--ink); line-height: 1.1; margin-bottom: 6px; }
+  .hc-desc { font-size: 0.75rem; color: var(--ink-60); line-height: 1.5; margin-bottom: 20px; }
+  .hc-foot { display: flex; align-items: center; justify-content: space-between; }
+  .hc-price { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600; color: var(--ink); }
+  .hc-btn { background: var(--ember); color: #fff; border: none; width: 38px; height: 38px; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; font-family: 'DM Sans', sans-serif; transition: background .2s; }
+  .hc-btn:hover { background: var(--ember-h); }
+
+  /* ── BAND ──────────────────────────────── */
+  .band { display: flex; background: var(--ink); }
+  .band-item { flex: 1; padding: 18px 24px; display: flex; align-items: center; gap: 14px; border-right: 1px solid rgba(255,255,255,0.08); }
+  .band-item:last-child { border-right: none; }
+  .band-icon { font-size: 1rem; opacity: .7; }
+  .band-lbl { font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+  .band-val { font-size: 0.8rem; color: rgba(255,255,255,0.85); font-weight: 500; margin-top: 2px; }
+
+  /* ── RESERVA ───────────────────────────── */
+  .reserva { padding: 88px 48px; background: var(--paper); border-bottom: 1px solid var(--ink-12); }
+  .reserva-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.5fr; gap: 72px; align-items: start; }
+  .res-intro { padding-top: 8px; }
+  .res-intro .tag { margin-bottom: 20px; }
+  .res-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 3.5vw, 3.2rem); font-weight: 300; color: var(--ink); line-height: 1; margin-bottom: 16px; }
+  .res-h2 em { font-style: italic; color: var(--ember); }
+  .res-desc { font-size: 0.85rem; color: var(--ink-60); line-height: 1.75; font-weight: 300; margin-bottom: 28px; }
+  .res-perks { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .res-perks li { font-size: 0.78rem; color: var(--ink-60); display: flex; align-items: center; gap: 10px; }
+  .res-perks li::before { content: ''; width: 16px; height: 1px; background: var(--ember); flex-shrink: 0; }
+
+  .res-form { background: var(--white); border: 1px solid var(--ink-12); padding: 36px 36px 32px; }
+  .res-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .rf { display: flex; flex-direction: column; border-bottom: 1px solid var(--ink-06); border-right: 1px solid var(--ink-06); padding: 14px 16px; }
+  .rf:nth-child(2n) { border-right: none; }
+  .rf.w2 { grid-column: span 2; border-right: none; }
+  .rf-label { font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-35); font-weight: 500; margin-bottom: 6px; }
+  .rf-input, .rf-select { border: none; outline: none; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--ink); background: transparent; width: 100%; padding: 0; appearance: none; -webkit-appearance: none; }
+  .rf-input::placeholder { color: var(--ink-35); }
+  .rf-select option { background: #fff; color: var(--ink); }
+  .rf-note { font-size: 0.62rem; color: var(--ink-35); margin-top: 4px; }
+  .res-submit { width: 100%; background: var(--ember); color: #fff; border: none; padding: 16px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .2s; margin-top: 20px; }
+  .res-submit:hover { background: var(--ember-h); }
+  .res-fine { font-size: 0.65rem; color: var(--ink-35); text-align: center; margin-top: 10px; }
+  .res-ok { display: none; text-align: center; padding: 32px 0 8px; }
+  .res-ok.show { display: block; }
+  .res-ok-mark { width: 44px; height: 44px; background: var(--ember); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; color: #fff; font-size: 1.1rem; }
+  .res-ok-title { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .res-ok-msg { font-size: 0.8rem; color: var(--ink-60); line-height: 1.6; }
+
+  /* ── MENU ──────────────────────────────── */
+  .menu { padding: 88px 48px; }
+  .sec-hd { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 40px; }
+  .sec-h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 3vw, 3rem); font-weight: 300; color: var(--ink); line-height: 1; }
+  .sec-h2 em { font-style: italic; color: var(--ember); }
+  .cats { display: flex; gap: 0; border: 1px solid var(--ink-12); }
+  .cat { padding: 7px 16px; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border: none; border-right: 1px solid var(--ink-12); background: transparent; color: var(--ink-35); font-family: 'DM Sans', sans-serif; transition: all .15s; }
+  .cat:last-child { border-right: none; }
+  .cat.on, .cat:hover { background: var(--ink); color: #fff; }
+
+  .grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--ink-12); border: 1px solid var(--ink-12); }
+  .card { background: var(--white); cursor: pointer; transition: background .2s; }
+  .card:hover { background: var(--paper-2); }
+  .card-img { height: 126px; background: var(--paper-2); display: flex; align-items: center; justify-content: center; font-size: 3.2rem; position: relative; border-bottom: 1px solid var(--ink-06); }
+  .card-badge { position: absolute; top: 10px; left: 10px; background: var(--ember); color: #fff; font-size: 0.54rem; font-weight: 600; letter-spacing: 0.12em; padding: 3px 8px; text-transform: uppercase; }
+  .card-body { padding: 18px 20px; }
+  .card-name { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: var(--ink); margin-bottom: 5px; line-height: 1.2; }
+  .card-desc { font-size: 0.7rem; color: var(--ink-60); line-height: 1.5; margin-bottom: 14px; }
+  .card-ft { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid var(--ink-06); }
+  .card-price { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--ink); }
+  .card-add { width: 28px; height: 28px; background: var(--ink-06); border: 1px solid var(--ink-12); color: var(--ink-60); font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; font-family: 'DM Sans', sans-serif; transition: all .15s; }
+  .card-add:hover { background: var(--ember); color: #fff; border-color: var(--ember); }
+  .feat { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; }
+  .feat .card-img { height: 100%; font-size: 5rem; border-bottom: none; border-right: 1px solid var(--ink-06); }
+  .feat .card-body { display: flex; flex-direction: column; justify-content: center; padding: 30px 28px; }
+  .feat .card-name { font-size: 1.4rem; margin-bottom: 10px; }
+  .feat .card-price { font-size: 1.7rem; }
+  .feat .card-add { width: 34px; height: 34px; }
+
+  /* ── ABOUT ─────────────────────────────── */
+  .about { background: var(--paper-2); border-top: 1px solid var(--ink-12); border-bottom: 1px solid var(--ink-12); padding: 88px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+  .about-vis { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 1px; background: var(--ink-12); border: 1px solid var(--ink-12); height: 300px; }
+  .av-a { grid-row: span 2; background: var(--paper-3); display: flex; align-items: center; justify-content: center; font-size: 4.5rem; }
+  .av-b { background: var(--white); display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+  .av-c { background: var(--ember); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .av-c-big { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; color: #fff; letter-spacing: 0.08em; line-height: 1; }
+  .av-c-sm { font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-top: 3px; }
+  .about-h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 300; color: var(--ink); line-height: 1; margin-bottom: 20px; }
+  .about-h2 em { font-style: italic; color: var(--ember); }
+  .about-q { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; font-weight: 300; color: var(--ink-60); line-height: 1.6; border-left: 2px solid var(--ember); padding-left: 16px; margin: 0 0 20px; }
+  .about-p { font-size: 0.82rem; color: var(--ink-60); line-height: 1.8; font-weight: 300; margin-bottom: 10px; }
+
+  /* ── HOURS ─────────────────────────────── */
+  .hours { padding: 88px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; }
+  .h-list { margin-top: 28px; border-top: 1px solid var(--ink-12); }
+  .h-row { display: flex; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--ink-06); font-size: 0.8rem; }
+  .h-day { color: var(--ink-35); letter-spacing: 0.02em; }
+  .h-time { color: var(--ink); }
+  .h-row.today .h-day { color: var(--ember); font-weight: 500; }
+  .h-row.today .h-time { font-weight: 500; }
+  .h-note { font-size: 0.62rem; color: var(--ink-35); margin-top: 10px; }
+
+  .loc-card { border: 1px solid var(--ink-12); padding: 28px; margin-top: 28px; background: var(--white); }
+  .loc-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--ink); margin-bottom: 12px; }
+  .loc-info { font-size: 0.78rem; color: var(--ink-60); line-height: 1.85; margin-bottom: 20px; }
+  .loc-info strong { color: var(--ink); font-weight: 500; }
+  .loc-btns { display: flex; gap: 10px; }
+  .loc-btn { flex: 1; padding: 11px; text-align: center; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .2s; }
+  .loc-btn.p { background: var(--ember); color: #fff; border: none; }
+  .loc-btn.p:hover { background: var(--ember-h); }
+  .loc-btn.g { background: transparent; color: var(--ink-60); border: 1px solid var(--ink-12); }
+  .loc-btn.g:hover { border-color: var(--ink-35); color: var(--ink); }
+
+  /* ── FOOTER ────────────────────────────── */
+  .footer { background: var(--ink); padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.14em; color: rgba(255,255,255,0.35); }
+  .footer-info { font-size: 0.63rem; color: rgba(255,255,255,0.25); text-align: center; line-height: 1.8; }
+  .footer-soc { display: flex; gap: 6px; }
+  .soc { width: 30px; height: 30px; border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; font-size: 0.62rem; cursor: pointer; color: rgba(255,255,255,0.3); transition: all .2s; }
+  .soc:hover { border-color: var(--ember); color: var(--ember); }
+
+  /* ── CART ──────────────────────────────── */
+  .cart { position: fixed; bottom: 24px; right: 24px; z-index: 99; background: var(--ink); color: #fff; padding: 12px 20px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: transform .2s; font-family: 'DM Sans', sans-serif; box-shadow: 0 4px 24px rgba(24,22,15,0.25); }
+  .cart:hover { transform: translateY(-2px); }
+  .cart-n { background: var(--ember); color: #fff; width: 20px; height: 20px; font-size: 0.62rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .cart-t { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+  .cart-p { font-size: 0.82rem; font-weight: 600; }
+</style>
+
+<div class="r">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a class="nav-brand" href="#">
+      <div class="nav-mark"></div>
+      <div>
+        <div class="nav-name">Santo Carbón</div>
+        <span class="nav-loc">Playas de Tijuana · El Jardín Food Park</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="document.querySelector('.menu').scrollIntoView({behavior:'smooth'});return false;">Menú</a></li>
+      <li><a href="#" onclick="document.querySelector('.about').scrollIntoView({behavior:'smooth'});return false;">Nosotros</a></li>
+      <li><a href="#" onclick="document.querySelector('.hours').scrollIntoView({behavior:'smooth'});return false;">Ubicación</a></li>
+    </ul>
+    <button class="nav-cta" onclick="document.querySelector('.reserva').scrollIntoView({behavior:'smooth'})">Reservar Mesa</button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-l">
+      <div class="tag">Hamburguesas al Carbón · Tijuana</div>
+      <h1 class="hero-h1">Fuego,<br><em>carne</em><br>y carbón.</h1>
+      <p class="hero-copy">Carne USDA Choice parrillada al carbón. Cortes premium, pan brioche artesanal y el sabor auténtico de Playas de Tijuana.</p>
+      <div class="hero-btns">
+        <button class="btn-p" onclick="document.querySelector('.reserva').scrollIntoView({behavior:'smooth'})">Reservar Mesa →</button>
+        <button class="btn-s" onclick="document.querySelector('.menu').scrollIntoView({behavior:'smooth'})">Ver Menú</button>
+      </div>
+      <div class="hero-metrics">
+        <div><div class="met-n">4.9</div><div class="met-l">Calificación</div></div>
+        <div><div class="met-n">3K+</div><div class="met-l">Seguidores</div></div>
+        <div><div class="met-n">100%</div><div class="met-l">Al Carbón</div></div>
+      </div>
+    </div>
+    <div class="hero-r">
+      <div class="hero-r-pattern"></div>
+      <div class="hero-r-big">SANTO<br>CARBÓN</div>
+      <div class="hero-card">
+        <div class="hc-label">⭐ Más pedida esta semana</div>
+        <div class="hc-name">La Santo Carbón</div>
+        <div class="hc-desc">180g USDA Choice · queso americano · tocino · cebolla caramelizada · pan brioche</div>
+        <div class="hc-foot">
+          <div class="hc-price">$185 MXN</div>
+          <button class="hc-btn add-btn" data-price="185">+</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BAND -->
+  <div class="band">
+    <div class="band-item"><div class="band-icon">🔥</div><div><div class="band-lbl">Especialidad</div><div class="band-val">100% Al Carbón</div></div></div>
+    <div class="band-item"><div class="band-icon">🥩</div><div><div class="band-lbl">Carne</div><div class="band-val">USDA Choice</div></div></div>
+    <div class="band-item"><div class="band-icon">📍</div><div><div class="band-lbl">Ubicación</div><div class="band-val">El Jardín Food Park</div></div></div>
+    <div class="band-item"><div class="band-icon">⏰</div><div><div class="band-lbl">Horario</div><div class="band-val">Lun – Dom · 1:00 pm – 11:00 pm</div></div></div>
+  </div>
+
+  <!-- RESERVA -->
+  <section class="reserva">
+    <div class="reserva-inner">
+      <div class="res-intro">
+        <div class="tag">Reservaciones</div>
+        <div class="res-h2">Reserva<br>tu <em>mesa</em></div>
+        <p class="res-desc">Garantiza tu lugar sin costo adicional. Confirmamos en menos de 2 horas por teléfono.</p>
+        <ul class="res-perks">
+          <li>Sin cargo por reservación</li>
+          <li>Confirmación por llamada</li>
+          <li>Grupos y eventos especiales</li>
+          <li>Comedor privado disponible</li>
+        </ul>
+      </div>
+      <div class="res-form" id="resFormWrap">
+        <div class="res-grid" id="resGrid">
+          <div class="rf">
+            <div class="rf-label">Nombre</div>
+            <input class="rf-input" type="text" placeholder="Tu nombre completo" id="resNombre">
+          </div>
+          <div class="rf">
+            <div class="rf-label">Teléfono</div>
+            <input class="rf-input" type="tel" placeholder="664 000 0000" id="resTel">
+          </div>
+          <div class="rf">
+            <div class="rf-label">Fecha</div>
+            <input class="rf-input" type="date" id="resFecha">
+          </div>
+          <div class="rf">
+            <div class="rf-label">Hora</div>
+            <select class="rf-select" id="resHora">
+              <option value="">— Selecciona —</option>
+              <option>1:00 pm</option><option>2:00 pm</option><option>3:00 pm</option>
+              <option>4:00 pm</option><option>5:00 pm</option><option>6:00 pm</option>
+              <option>7:00 pm</option><option>8:00 pm</option><option>9:00 pm</option>
+              <option>10:00 pm</option>
+            </select>
+          </div>
+          <div class="rf w2" style="border-bottom:1px solid var(--ink-06);">
+            <div class="rf-label">Número de personas</div>
+            <select class="rf-select" id="resPersonas">
+              <option value="">— Selecciona —</option>
+              <option>1 persona</option><option>2 personas</option><option>3 personas</option>
+              <option>4 personas</option><option>5 personas</option><option>6 personas</option>
+              <option>7+ personas</option>
+            </select>
+          </div>
+          <div class="rf w2" style="border-bottom:none;">
+            <div class="rf-label">Notas (opcional)</div>
+            <input class="rf-input" type="text" placeholder="Cumpleaños, alergias, solicitudes especiales…" id="resNotas">
+          </div>
+        </div>
+        <button class="res-submit" onclick="confirmarReserva()">Confirmar Reservación</button>
+        <div class="res-fine">Te contactaremos para confirmar · Sin costo</div>
+        <div class="res-ok" id="resOk">
+          <div class="res-ok-mark">✓</div>
+          <div class="res-ok-title">Reserva recibida</div>
+          <div class="res-ok-msg">Te llamaremos en breve para confirmar.<br>¡Te esperamos en Santo Carbón!</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu">
+    <div class="sec-hd">
+      <div>
+        <div class="tag" style="margin-bottom:12px;">Lo que servimos</div>
+        <div class="sec-h2">El <em>menú</em></div>
+      </div>
+      <div class="cats">
+        <button class="cat on" onclick="setCat(this)">Todo</button>
+        <button class="cat" onclick="setCat(this)">Burgers</button>
+        <button class="cat" onclick="setCat(this)">Smash</button>
+        <button class="cat" onclick="setCat(this)">Extras</button>
+        <button class="cat" onclick="setCat(this)">Bebidas</button>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="card feat">
+        <div class="card-img"><span>🍔</span><div class="card-badge">Signature</div></div>
+        <div class="card-body">
+          <div class="tag" style="margin-bottom:10px;font-size:0.56rem;">La más famosa</div>
+          <div class="card-name">La Santo Carbón</div>
+          <div class="card-desc">180g USDA Choice parrillada al carbón · queso americano · tocino · cebolla caramelizada · aderezo de la casa · pan brioche artesanal</div>
+          <div class="card-ft"><div class="card-price">$185 MXN</div><button class="card-add add-btn" data-price="185">+</button></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img"><span>🧀</span><div class="card-badge">Smash</div></div>
+        <div class="card-body">
+          <div class="card-name">Doble Smash</div>
+          <div class="card-desc">Dos patties · costra cheddar · pickles · salsa especial</div>
+          <div class="card-ft"><div class="card-price">$165 MXN</div><button class="card-add add-btn" data-price="165">+</button></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img"><span>🥓</span></div>
+        <div class="card-body">
+          <div class="card-name">BBQ Tocino</div>
+          <div class="card-desc">180g al carbón · tocino · salsa BBQ de la casa · aros de cebolla</div>
+          <div class="card-ft"><div class="card-price">$195 MXN</div><button class="card-add add-btn" data-price="195">+</button></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img"><span>🌶️</span></div>
+        <div class="card-body">
+          <div class="card-name">La Picosa</div>
+          <div class="card-desc">180g al carbón · jalapeños · habanero mayo · queso oaxaca · aguacate</div>
+          <div class="card-ft"><div class="card-price">$190 MXN</div><button class="card-add add-btn" data-price="190">+</button></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="height:110px;"><span style="font-size:2.8rem;">🍟</span></div>
+        <div class="card-body">
+          <div class="card-name">Papas al Carbón</div>
+          <div class="card-desc">Papas fritas con aderezo de chipotle</div>
+          <div class="card-ft"><div class="card-price">$65 MXN</div><button class="card-add add-btn" data-price="65">+</button></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="height:110px;"><span style="font-size:2.8rem;">🧅</span></div>
+        <div class="card-body">
+          <div class="card-name">Onion Rings</div>
+          <div class="card-desc">Aros de cebolla capeados · dip ranch o BBQ</div>
+          <div class="card-ft"><div class="card-price">$75 MXN</div><button class="card-add add-btn" data-price="75">+</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="about-vis">
+      <div class="av-a"><span>🔥</span></div>
+      <div class="av-b"><span>🥩</span></div>
+      <div class="av-c"><div class="av-c-big">USDA</div><div class="av-c-sm">Choice</div></div>
+    </div>
+    <div>
+      <div class="tag" style="margin-bottom:16px;">Nuestra historia</div>
+      <div class="about-h2">Calidad desde<br>el <em>corazón</em></div>
+      <blockquote class="about-q">"La calidad viene del corazón. Sabor real entre panes de Tijuana."</blockquote>
+      <p class="about-p">Somos un concepto especializado en hamburguesas artesanales para quienes buscan calidad real y sabor auténtico. Trabajamos únicamente con cortes premium USDA Choice certificados, parrillados al carbón.</p>
+      <p class="about-p">Nos encontramos en el corazón de Playas de Tijuana, dentro del food park El Jardín, Av. Paseo Ensenada 1443.</p>
+    </div>
+  </section>
+
+  <!-- HOURS -->
+  <section class="hours">
+    <div>
+      <div class="tag" style="margin-bottom:14px;">Horarios</div>
+      <div class="sec-h2">Cuándo<br><em>visitarnos</em></div>
+      <div class="h-list">
+        <div class="h-row"><span class="h-day">Lunes</span><span class="h-time">1:00 pm – 11:00 pm</span></div>
+        <div class="h-row"><span class="h-day">Martes</span><span class="h-time">1:00 pm – 11:00 pm</span></div>
+        <div class="h-row"><span class="h-day">Miércoles</span><span class="h-time">1:00 pm – 11:00 pm</span></div>
+        <div class="h-row"><span class="h-day">Jueves</span><span class="h-time">1:00 pm – 12:00 am</span></div>
+        <div class="h-row"><span class="h-day">Viernes</span><span class="h-time">1:00 pm – 1:00 am</span></div>
+        <div class="h-row"><span class="h-day">Sábado</span><span class="h-time">1:00 pm – 1:00 am</span></div>
+        <div class="h-row"><span class="h-day">Domingo</span><span class="h-time">1:00 pm – 10:00 pm</span></div>
+      </div>
+      <div class="h-note">* Horarios sujetos a cambios en días festivos</div>
+    </div>
+    <div>
+      <div class="tag" style="margin-bottom:14px;">Ubicación</div>
+      <div class="sec-h2">Dónde<br><em>estamos</em></div>
+      <div class="loc-card">
+        <div class="loc-name">El Jardín Food Park</div>
+        <div class="loc-info">
+          <strong>Av. Paseo Ensenada 1443</strong><br>
+          Fracc. Secc Jardines, Playas de Tijuana<br>
+          Baja California, México<br><br>
+          Tel: <strong>664 135 5603</strong><br>
+          Precio por persona: <strong>$200 – $300 MXN</strong><br>
+          Wi-Fi · Comedor privado · Menú para niños
+        </div>
+        <div class="loc-btns">
+          <button class="loc-btn p">📍 Cómo llegar</button>
+          <button class="loc-btn g">📞 Llamar</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-logo">Santo Carbón</div>
+    <div class="footer-info">© 2026 Santo Carbón TJ · Playas de Tijuana, B.C.<br>Mockup de propuesta — diseño no oficial</div>
+    <div class="footer-soc">
+      <div class="soc">IG</div><div class="soc">FB</div><div class="soc">TK</div>
+    </div>
+  </footer>
+
+  <!-- CART -->
+  <div class="cart">
+    <div class="cart-n" id="cn">0</div>
+    <div class="cart-t">Tu orden</div>
+    <div class="cart-p" id="cp">$0 MXN</div>
+  </div>
+
+</div>
+
+<script>
+function setCat(b) {
+  document.querySelectorAll('.cat').forEach(c => c.classList.remove('on'));
+  b.classList.add('on');
+}
+
+const days = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+const today = days[new Date().getDay()];
+document.querySelectorAll('.h-row').forEach(r => {
+  const d = r.querySelector('.h-day');
+  if (d && d.textContent.trim() === today) {
+    r.classList.add('today');
+    d.textContent = today + ' ●';
+  }
+});
+
+const fechaInput = document.getElementById('resFecha');
+if (fechaInput) fechaInput.min = new Date().toISOString().split('T')[0];
+
+function confirmarReserva() {
+  const vals = ['resNombre','resTel','resFecha','resHora','resPersonas'];
+  for (const id of vals) {
+    if (!document.getElementById(id).value.trim()) {
+      document.getElementById(id).style.borderBottom = '2px solid var(--ember)';
+      document.getElementById(id).focus();
+      return;
+    }
+  }
+  document.getElementById('resGrid').style.display = 'none';
+  document.querySelector('.res-submit').style.display = 'none';
+  document.querySelector('.res-fine').style.display = 'none';
+  document.getElementById('resOk').classList.add('show');
+}
+
+let total = 0, count = 0;
+document.querySelectorAll('.add-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const price = parseInt(btn.dataset.price) || 185;
+    count++; total += price;
+    document.getElementById('cn').textContent = count;
+    document.getElementById('cp').textContent = '$' + total + ' MXN';
+    const orig = btn.textContent;
+    btn.textContent = '✓';
+    btn.style.background = '#2d7a4f';
+    btn.style.color = '#fff';
+    setTimeout(() => {
+      btn.textContent = orig;
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 900);
+  });
+});
+</script>
